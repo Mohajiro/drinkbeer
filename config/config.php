@@ -1,7 +1,7 @@
 <?php
 return [
-    'DB_HOST' => 'mysql-drinkbeer.alwaysdata.net',
-    'DB_NAME' => 'drinkbeer_db',
-    'DB_USER' => 'drinkbeer',
-    'DB_PASS' => 'Qwerty2024@'
+    'DB_HOST' => 'mysql',
+    'DB_NAME' => 'drinkbeer',
+    'DB_USER' => 'root',
+    'DB_PASS' => 'root'
 ];
