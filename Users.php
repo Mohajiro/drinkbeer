@@ -1,64 +1,33 @@
 <?php
-require 'Database.php';
-require 'User.php';
+class User {
+    private $db;
 
-$userObj = new User();
+    public function __construct() {
+        $this->db = Database::getInstance()->getConnection();
+    }
 
-$users = $userObj->getAllUsers();
+    // Obtenez tous les users
+    public function getAllUsers() {
+        $stmt = $this->db->query("SELECT * FROM users");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-// $userObj->addUser('John', 'Doe', 'john.doe@example.com', '123456','member');
+    // Ajoutez un nouvel user
+    public function addUser($name, $password, $email, $role) {
+        $stmt = $this->db->prepare("INSERT INTO users (name, password, email, role) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$name, $password, $email, $role]); 
+    }
 
-// $userObj->updateUser('Jane', 'Doe', 'jane.doe@example.com', '123456', 'admin', 32);
+    // Mettez à jour un user
+    public function updateUser($name, $email, $password, $role, $id) {
+        $stmt = $this->db->prepare("UPDATE users SET  name = ?, email = ?, password = ?, role = ? WHERE id = ?");
+        $stmt->execute([$name, $email, $password, $role, $id]);
+    }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $userObj->deleteUser((int)$_GET['id']);
-    header("Location: index.php"); 
-    exit();
+    // Supprimez un user
+    public function deleteUSer($id) {
+        $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+    }
 }
-
-   
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-        td, th {
-            padding: 5px;
-            border: 1px solid black;
-        }
-    </style>
-</head>
-<body>
-    <table>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Creation date</th>
-        <?php
-            foreach ($users as $user):
-        ?> 
-            <tr>
-                <td><?php echo $user['id'] ?></td>
-                <td><?php echo $user['name'] ?></td>
-                <td><?php echo $user['email'] ?></td>
-                <td><?php echo $user['role'] ?></td>
-                <td><?php echo $user['created_date'] ?></td>
-                <td>
-                <a href="index.php?id=<?php echo $user['id']; ?>">
-                   Delete
-                </a>
-            </td>
-            </tr>
-        <?php
-        endforeach; 
-        ?>
-    </table>
-</body>
-</html>
