@@ -6,6 +6,7 @@
         </a>
 
         <nav class="flex space-x-6">
+            <a href="/drinkbeer/inscription" class="text-gray-600 hover:text-blue-600">S'inscrir</a>
             <a href="/drinkbeer/home" class="text-gray-600 hover:text-blue-600">Main Page</a>
             <a href="/drinkbeer/beers" class="text-gray-600 hover:text-blue-600">Catalogue des bieres</a>
             <a href="#" class="text-gray-600 hover:text-blue-600">Contacts</a>

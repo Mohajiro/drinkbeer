@@ -5,8 +5,7 @@ class BeerController {
     public function index() {
         $beerModel = new Beer();
         $beers = $beerModel->getAllBeers();
-
-        $view = 'beer'; 
-        require __DIR__ . '/../views/layout.php';
+        $view = 'beer';
+        require __DIR__ . '/../views/layout.php'; 
     }
 }

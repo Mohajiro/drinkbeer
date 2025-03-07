@@ -4,13 +4,13 @@ require 'head.php'
 ?>
 <body class="bg-gray-100">
     <?php 
-    require 'header.php'
+        require 'header.php'
     ?>
     <main>
         <?php require "app/views/{$view}.php"; ?>
     </main>
     <?php 
-    require 'footer.php'
+        require 'footer.php'
     ?>
 </body>
 </html>
