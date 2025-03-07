@@ -5,7 +5,16 @@
             <span class="text-xl font-bold text-blue-600">DrinkBeer</span>
         </a>
         <nav class="flex space-x-6">
-            
+            <p>Hello,
+                <?php 
+                if (!$_SESSION['user_name']) {
+                    $_SESSION['user_name'] = 'User';
+                    echo $_SESSION['user_name'];
+                } else {
+                    echo $_SESSION['user_name'];
+                }
+                ?>
+            </p>
             <a href="/drinkbeer/login" class="text-gray-600 hover:text-blue-600">S'identifier</a>
             <a href="/drinkbeer/inscription" class="text-gray-600 hover:text-blue-600">S'inscrir</a>
             <a href="/drinkbeer/home" class="text-gray-600 hover:text-blue-600">Main Page</a>

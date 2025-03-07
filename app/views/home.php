@@ -1,4 +1,9 @@
 <div class="container mx-auto p-6 text-center">
+    <?php 
+    var_dump($_SESSION);
+
+    ?>
+</p>
     <h1 class="text-4xl font-bold text-yellow-600"> Bienvenue chez DrinkBeer !</h1>
     <p class="text-gray-700 mt-4 text-lg">Découvrez une sélection exceptionnelle de bières artisanales, 
         classiques et rares du monde entier. 
