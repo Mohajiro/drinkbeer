@@ -34,6 +34,16 @@ switch ($uri) {
         }
         exit;
 
+    case 'login':
+        $view = 'login'; 
+        break;
+            
+    case 'loginUser':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->login();
+        }
+        exit;
+
     case (preg_match('/^userForm(\?.*)?$/', $uri) ? true : false):
         $view = 'userForm';
         require __DIR__ . "/views/layout.php";

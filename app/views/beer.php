@@ -9,8 +9,8 @@
                     <h2 class="text-xl font-semibold"><?php echo htmlspecialchars($beer['name']); ?></h2>
                     <p class="text-gray-600"> Origin: <strong><?php echo htmlspecialchars($beer['origin']); ?></strong></p>
                     <p class="text-gray-600"> Alcohol: <strong><?php echo htmlspecialchars($beer['alcohol']); ?>%</strong></p>
-                    <p class="text-sm text-gray-500"><?php echo htmlspecialchars($beer['description']); ?></p>
-                    <p class="mt-2 text-lg font-bold text-blue-500"> $<?php echo htmlspecialchars($beer['average_price']); ?></p>
+                    <p class="text-sm text-gray-500 line-clamp"><?php echo htmlspecialchars($beer['description']); ?></p>
+                    <p class="mt-2 text-lg font-bold text-blue-500"><?php echo htmlspecialchars($beer['average_price']); ?> euros</p>
                 </div>
             </div>
         <?php endforeach; ?>

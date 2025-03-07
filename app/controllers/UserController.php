@@ -37,4 +37,27 @@ class UserController {
             }
         }
     }
+
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            session_start(); // Стартуем сессию
+    
+            $email = trim($_POST['email']);
+            $password = $_POST['password'];
+    
+            $user = $this->userModel->getUserByEmail($email);
+    
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['name'];
+                $_SESSION['user_role'] = $user['role'];
+    
+                header("Location: /drinkbeer/home");
+                exit();
+            } else {
+                echo "<p class='text-red-500 text-center'> Identifiants incorrects.</p>";
+            }
+        }
+    }    
 }
+
