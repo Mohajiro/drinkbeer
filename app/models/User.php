@@ -40,4 +40,20 @@ class User {
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }    
+
+    public function updateUser($id, $name, $email, $password, $role) {
+        if ($password) {
+            $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?");
+            return $stmt->execute([$name, $email, $password, $role, $id]);
+        } else {
+            $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?");
+            return $stmt->execute([$name, $email, $role, $id]);
+        }
+    }
+
+    public function deleteUser($id) {
+        $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+    
 }

@@ -22,8 +22,8 @@
                         <td class="border p-2"><?php echo htmlspecialchars($user['role']); ?></td>
                         <td class="border p-2"><?php echo htmlspecialchars($user['created_at']); ?></td>
                         <td class="border p-2 flex justify-center space-x-2">
-                            <a href="/drinkbeer/userForm?id=<?php echo $user['id']; ?>" class="px-3 py-1 bg-blue-500 text-white rounded">Modifier</a>
-                            <a href="/drinkbeer/deleteUser?id=<?php echo $user['id']; ?>" class="px-3 py-1 bg-red-500 text-white rounded" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">Supprimer</a>
+                        <a href="/drinkbeer/userForm?id=<?php echo $user['id']; ?>" class="px-3 py-1 bg-blue-500 text-white rounded">Modifier</a>
+                        <a href="/drinkbeer/deleteUser?id=<?php echo $user['id']; ?>" class="px-3 py-1 bg-red-500 text-white rounded" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

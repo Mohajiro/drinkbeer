@@ -20,6 +20,40 @@ switch ($uri) {
         $beerController->index();
         exit; 
 
+    case 'updateBeer':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $beerController->updateBeer();
+        }
+        exit;
+
+    case (preg_match('/^beerForm(\?.*)?$/', $uri) ? true : false):
+        $view = 'beerForm';
+        require __DIR__ . "/views/layout.php";
+        exit; 
+
+    case 'addBeer':
+        $view = 'addBeer';
+        require __DIR__ . "/views/layout.php";
+        exit;
+    
+    case 'insertBeer':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $beerController->addBeer();
+        }
+        exit;
+        
+    case 'deleteBeer':
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+            $beerController->deleteBeer();
+        }
+        exit;
+
+    case (preg_match('/^deleteBeer(\?.*)?$/', $uri) ? true : false):
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+            $beerController->deleteBeer();
+        }
+        exit;
+        
     case 'users':
         $userController->index();
         exit; 
@@ -44,14 +78,28 @@ switch ($uri) {
         }
         exit;
 
+    case 'logout':
+        $userController->logout();
+        exit;
+        
     case (preg_match('/^userForm(\?.*)?$/', $uri) ? true : false):
         $view = 'userForm';
         require __DIR__ . "/views/layout.php";
         exit;
     
-    case 'deleteUser':
+    case (preg_match('/^deleteUser(\?.*)?$/', $uri) ? true : false):
         $userController->delete();
         exit;
+    
+    case 'updateUser':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->update();
+        }
+        exit;    
+
+    case (preg_match('/^beer\/(\d+)$/', $uri, $matches) ? true : false):
+        $beerController->showBeer($matches[1]);
+        exit;    
 
     default:
         http_response_code(404);
