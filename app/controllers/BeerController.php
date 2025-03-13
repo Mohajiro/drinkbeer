@@ -9,7 +9,15 @@ class BeerController {
     }
 
     public function index() {
-        $beers = $this->beerModel->getAllBeers();
+        $categoryId = isset($_GET['category_id']) ? (int)$_GET['category_id'] : null;
+
+        if ($categoryId) {
+            $beers = $this->beerModel->getBeersByCategory($categoryId);
+        } else {
+            $beers = $this->beerModel->getAllBeers();
+        }
+
+        $categories = $this->beerModel->getAllCategories();
         $view = 'beer';
         require __DIR__ . '/../views/layout.php';
     }
@@ -35,8 +43,11 @@ class BeerController {
             $description = trim($_POST['description']);
             $average_price = (float)$_POST['average_price'];
             $image_url = trim($_POST['image_url']);
-    
+            $categories = $_POST['categories'] ?? [];
+
             if ($this->beerModel->insertBeer($name, $origin, $alcohol, $description, $average_price, $image_url)) {
+                $beerId = $this->beerModel->getLastInsertedId();
+                $this->beerModel->updateBeerCategories($beerId, $categories);
                 header("Location: /drinkbeer/beers");
                 exit();
             } else {
@@ -48,7 +59,7 @@ class BeerController {
     public function deleteBeer() {
         if (isset($_GET['id'])) {
             $beerId = (int)$_GET['id'];
-    
+
             if ($this->beerModel->getBeerById($beerId)) {
                 $this->beerModel->deleteBeerById($beerId);
                 header("Location: /drinkbeer/beers");
@@ -69,7 +80,7 @@ class BeerController {
             $average_price = (float)$_POST['average_price'];
             $image_url = trim($_POST['image_url']);
             $categories = $_POST['categories'] ?? [];
-    
+
             if ($this->beerModel->updateBeer($beerId, $name, $origin, $alcohol, $description, $average_price, $image_url)) {
                 $this->beerModel->updateBeerCategories($beerId, $categories);
                 header("Location: /drinkbeer/beers");
@@ -78,5 +89,5 @@ class BeerController {
                 echo "<p class='text-red-500 text-center'>Erreur lors de la modification.</p>";
             }
         }
-    }  
+    }
 }

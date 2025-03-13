@@ -48,6 +48,10 @@ switch ($uri) {
         }
         exit;
 
+    case (preg_match('/^beers(\?.*)?$/', $uri) ? true : false):
+        $beerController->index();
+        exit;
+
     case (preg_match('/^deleteBeer(\?.*)?$/', $uri) ? true : false):
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
             $beerController->deleteBeer();

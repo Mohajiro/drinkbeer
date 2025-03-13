@@ -17,7 +17,7 @@ class Beer {
         $stmt = $this->db->prepare("SELECT * FROM beers WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
-    }   
+    }
 
     public function updateBeer($id, $name, $origin, $alcohol, $description, $average_price, $image_url) {
         $stmt = $this->db->prepare("UPDATE beers SET name = ?, origin = ?, alcohol = ?, description = ?, average_price = ?, image_url = ? WHERE id = ?");
@@ -47,7 +47,7 @@ class Beer {
 
     public function updateBeerCategories($beerId, $categories) {
         $this->db->prepare("DELETE FROM beer_categories WHERE beer_id = ?")->execute([$beerId]);
-    
+
         foreach ($categories as $categoryId) {
             $stmt = $this->db->prepare("INSERT INTO beer_categories (beer_id, category_id) VALUES (?, ?)");
             $stmt->execute([$beerId, $categoryId]);
@@ -63,6 +63,15 @@ class Beer {
         ");
         $stmt->execute([$beerId]);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }    
-    
+    }
+
+    public function getBeersByCategory($categoryId) {
+        $stmt = $this->db->prepare(" 
+            SELECT beers.* FROM beers 
+            JOIN beer_categories ON beers.id = beer_categories.beer_id 
+            WHERE beer_categories.category_id = ?
+        ");
+        $stmt->execute([$categoryId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
