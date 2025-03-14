@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exemple XSS</title>
+  </head>
+  <body>
+    <h1>Exemple de XSS</h1>
+    <div id="content"></div>
+    <script>
+      const userInput = prompt("Entrez un texte à afficher:");
+      document.getElementById("content").innerHTML = userInput;
+    </script>
+  </body>
+</html>
