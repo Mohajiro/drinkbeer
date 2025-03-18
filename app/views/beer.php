@@ -3,6 +3,7 @@ $beerModel = new Beer();
 ?>
     
 <div class="container mx-auto p-6 flex items-end flex-col">
+<a href="/drinkbeer/addBeer" class="px-3 py-1 bg-gray-300 text-gray-800 rounded-lg text-sm">Ajouter une biere</a>
     <?php 
         $cat = $beerModel->getAllCategories();
     ?>

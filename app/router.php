@@ -30,15 +30,14 @@ switch ($uri) {
         $view = 'beerForm';
         require __DIR__ . "/views/layout.php";
         exit; 
-
+        
     case 'addBeer':
-        $view = 'addBeer';
-        require __DIR__ . "/views/layout.php";
+        $beerController->addBeer();
         exit;
     
     case 'insertBeer':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $beerController->addBeer();
+            $beerController->insertBeer();
         }
         exit;
         

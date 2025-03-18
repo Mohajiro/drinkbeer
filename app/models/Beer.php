@@ -19,6 +19,10 @@ class Beer {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getLastInsertId() {
+        return $this->db->lastInsertId();
+    }
+
     public function updateBeer($id, $name, $origin, $alcohol, $description, $average_price, $image_url) {
         $stmt = $this->db->prepare("UPDATE beers SET name = ?, origin = ?, alcohol = ?, description = ?, average_price = ?, image_url = ? WHERE id = ?");
         return $stmt->execute([$name, $origin, $alcohol, $description, $average_price, $image_url, $id]);
